@@ -1,5 +1,5 @@
 # Arcade Cabinet
-
+![alt text](image.png)
 # How to run
 
 Before running, ensure Docker Desktop is installed and running.
