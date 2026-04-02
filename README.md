@@ -1,23 +1,22 @@
-# Project Name
-Put here a short paragraph describing your project. 
-Adding an screenshot or a mockup of your application in action would be nice.  
+# Arcade Cabinet
 
-![This is a screenshot.](images.png)
 # How to run
-Provide here instructions on how to use your application.   
-- Download the latest binary from the Release section on the right on GitHub.  
-- On the command line uncompress using
-```
-tar -xzf  
-```
+
+Before running, ensure Docker Desktop is installed and running.
+
+1. In Docker Desktop settings, under "General", enable "Expose daemon on tcp://localhost:2375 without TLS".
+
+2. The `.env` file is configured for cross-platform. For Windows/Mac/Linux, it uses `tcp://host.docker.internal:2375`. If you need to change it, edit `.env`.
+
 - On the command line run with
 ```
-./hello
+docker-compose up --build  
 ```
-- You will see Hello World! on your terminal. 
+
+This will start the backend on port 8000 and frontend on port 3000.
 
 # How to contribute
-Follow this project board to know the latest status of the project: [http://...]([http://...])  
+Follow this project board to know the latest status of the project: [https://nq-98.atlassian.net/jira/software/projects/AC/boards/35] 
 
 ### How to build
 - Use this github repository: ... 
