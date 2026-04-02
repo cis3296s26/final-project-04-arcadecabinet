@@ -13,13 +13,21 @@
 
     <section class="grid-container">
       <article class="game-card">
-        <button
-          type="button"
-          class="image-selector"
-          onclick="window.location.href = 'config.html?game=minecraft'"
-        >
-          <img src="./imgs/mc.png" alt="Select Minecraft" />
-        </button>
+        <div class="image-wrapper">
+          <img src="./imgs/mc.png" alt="Minecraft" />
+
+          <div class="overlay-buttons">
+            <button class="btn create-btn"
+            onclick="window.location.href = 'config.html?game=minecraft'"
+            >Create
+            </button>
+            <button class="btn join-btn"
+            onclick="window.location.href = 'config.html?game=minecraft'"
+
+            >Join</button>
+          </div>
+        </div>
+        
         <h3>Minecraft</h3>
         <p>Status: <em>Available</em></p>
       </article>

@@ -79,3 +79,53 @@ img {
 .coming-soon img {
   filter: blur(5px);
 }
+
+
+/*create and join*/
+
+.image-wrapper {
+  position: relative;
+}
+.overlay-buttons {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 10px;
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.image-wrapper:hover .overlay-buttons {
+  opacity: 1;
+}
+.btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Create */
+.create-btn {
+  background: #00cfec;
+  color: black;
+}
+
+.create-btn:hover {
+  background: #00a9c0;
+}
+
+/* Join */
+.join-btn {
+  background: #333;
+  color: white;
+}
+
+.join-btn:hover {
+  background: #555;
+}
