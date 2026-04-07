@@ -43,29 +43,35 @@ def list_servers():
 @app.post("/api/test/start")
 def start_test_container():
     """
-    POC: Start a simple nginx container to prove Docker integration works
+    POC: Start a simple Minecraft server container using itzg 
     """
     join_code = generate_join_code()
     
-    # Start a lightweight nginx container as proof
+    # Start a Minecraft server container using a simpler Minecraft server image
     container = docker_client.containers.run(
-        "nginx:alpine",
+        "itzg/minecraft-server:latest",
         detach=True,
-        ports={'80/tcp': None},  # Random port
-        name=f"test-{join_code.lower()}",
+        environment={
+            "EULA": "TRUE",
+            "VERSION": "1.20.4",
+            "TYPE": "VANILLA"
+        },
+        ports={'25565/tcp': None},
+        volumes=[f"/tmp/minecraft-{join_code}:/data"],
+        name=f"minecraft-{join_code.lower()}",
         remove=True
     )
-    
-    # Get assigned port
+
+    # Get assigned host port
     container.reload()
-    port_info = container.attrs['NetworkSettings']['Ports']['80/tcp']
+    port_info = container.attrs['NetworkSettings']['Ports']['25565/tcp']
     host_port = port_info[0]['HostPort'] if port_info else "unknown"
     
     # Store server info
     server_info = {
         "join_code": join_code,
         "container_id": container.short_id,
-        "game_type": "test",
+        "game_type": "minecraft",
         "status": "running",
         "port": host_port
     }
@@ -74,7 +80,7 @@ def start_test_container():
     return {
         "success": True,
         "server": server_info,
-        "message": f"Test container started. Access at localhost:{host_port}"
+        "message": f"Minecraft server started. Join at localhost:{host_port}"
     }
 
 
