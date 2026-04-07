@@ -7,27 +7,29 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <header>
-      <h1>Arcade Cabinet</h1>
+    <header class="main-header">
+      <h1 class="logo-text">Arcade Cabinet</h1>
     </header>
-
     <section class="grid-container">
       <article class="game-card">
         <div class="image-wrapper">
-          <img src="./imgs/mc.png" alt="Minecraft" />
+          <img src="./imgs/mc-bg.png" alt="Minecraft" />
 
           <div class="overlay-buttons">
-            <button class="btn create-btn"
-            onclick="window.location.href = 'config.html?game=minecraft'"
-            >Create
+            <button
+              class="btn create-btn"
+              onclick="window.location.href = 'config.html?game=minecraft'"
+            >
+              Create
             </button>
-            <button class="btn join-btn"
-            onclick="window.location.href = 'config.html?game=minecraft'"
-
-            >Join</button>
+            <button
+              class="btn join-btn"
+              onclick="window.location.href = 'config.html?game=minecraft'"
+            >
+              Join
+            </button>
           </div>
         </div>
-        
         <h3>Minecraft</h3>
         <p>Status: <em>Available</em></p>
       </article>
@@ -37,16 +39,54 @@
           class="image-selector"
           onclick="window.location.href = 'config.html?game=cs2'"
         >
-          <img src="./imgs/cs2.png" alt="Select CS2" />
+          <img src="./imgs/cs2-bg.png" alt="Select CS2" />
         </button>
         <h3>CS2</h3>
         <p>Status: <em>Coming Soon</em></p>
       </article>
       <article class="game-card coming-soon">
         <button type="button" class="image-selector" disabled>
-          <img src="placeholder.jpg" alt="Valheim - Coming Soon" />
+          <img src="./imgs/valheim-bg.png" alt="Valheim - Coming Soon" />
         </button>
         <h3>Valheim</h3>
+        <p>Status: <em>Coming Soon</em></p>
+      </article>
+      <article class="game-card coming-soon">
+        <button type="button" class="image-selector" disabled>
+          <img src="./imgs/rust-bg.png" alt="Rust - Coming Soon" />
+        </button>
+        <h3>Rust</h3>
+        <p>Status: <em>Coming Soon</em></p>
+      </article>
+      <article class="game-card coming-soon">
+        <button type="button" class="image-selector" disabled>
+          <img
+            src="./imgs/ark-bg.png"
+            alt="Ark: Survival Evolved - Coming Soon"
+          />
+        </button>
+        <h3>Ark: Survival Evolved</h3>
+        <p>Status: <em>Coming Soon</em></p>
+      </article>
+      <article class="game-card coming-soon">
+        <button type="button" class="image-selector" disabled>
+          <img src="./imgs/arma3-bg.png" alt="Arma 3 - Coming Soon" />
+        </button>
+        <h3>Arma 3</h3>
+        <p>Status: <em>Coming Soon</em></p>
+      </article>
+      <article class="game-card coming-soon">
+        <button type="button" class="image-selector" disabled>
+          <img src="./imgs/kf2-bg.png" alt="Killing Floor 2 - Coming Soon" />
+        </button>
+        <h3>Killing Floor 2</h3>
+        <p>Status: <em>Coming Soon</em></p>
+      </article>
+      <article class="game-card coming-soon">
+        <button type="button" class="image-selector" disabled>
+          <img src="./imgs/terraria-bg.png" alt="Terraria - Coming Soon" />
+        </button>
+        <h3>Terraria</h3>
         <p>Status: <em>Coming Soon</em></p>
       </article>
     </section>

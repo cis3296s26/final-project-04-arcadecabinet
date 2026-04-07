@@ -20,10 +20,34 @@ img {
 /* Parent Container */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 220px);
+  grid-template-columns: repeat(4, 1fr);
   gap: 30px;
   padding: 50px;
   justify-content: center;
+}
+
+/* Top Header */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background: #1e1e2f;
+  opacity: 0.8;
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+.logo-text {
+  font-size: 1.8rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow:
+    0 0 10px #00cfec,
+    0 0 20px #00cfec;
 }
 
 /* Game Card */
@@ -54,8 +78,9 @@ img {
 
 .image-selector img {
   width: 100%;
-  height: 320px;
-  object-fit: cover;
+  /* height: 320px; */
+  aspect-ratio: 2/3;
+  object-fit: contain;
   display: block;
 }
 
@@ -79,7 +104,6 @@ img {
 .coming-soon img {
   filter: blur(5px);
 }
-
 
 /*create and join*/
 
