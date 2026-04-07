@@ -6,6 +6,54 @@
     <title>Join</title>
 </head>
 <body>
-    
+    <div class="container">
+    <h1>Enter Join Code</h1>
+
+    <div class="code-inputs">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+    </div>
+
+    <button class="join-btn" onclick="joinGame()">Join</button>
+  </div>
+
+  <script>
+    const inputs = document.querySelectorAll(".code-inputs input");
+
+    // junmp to next box
+    inputs.forEach((input, index) => {
+      input.addEventListener("input", () => {
+        input.value = input.value.replace(/[^0-9]/g, ""); // number only
+        if (input.value && index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        }
+      });
+
+      // back
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Backspace" && !input.value && index > 0) {
+          inputs[index - 1].focus();
+        }
+      });
+    });
+
+    function joinGame() {
+      let code = "";
+      inputs.forEach(input => code += input.value);
+
+      if (code.length < inputs.length) {
+        alert("Please enter full code!");
+        return;
+      }
+
+      alert("Joining game with code: " + code);
+
+      
+    }
+  </script>
 </body>
 </html>
