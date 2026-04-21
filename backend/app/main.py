@@ -57,7 +57,7 @@ def start_test_container():
             "TYPE": "VANILLA"
         },
         ports={'25565/tcp': None},
-        volumes=[f"/tmp/minecraft-{join_code}:/data"],
+        volumes=[f"minecraft-{join_code}:/data"],  # Named volume persists
         name=f"minecraft-{join_code.lower()}",
         remove=True
     )
