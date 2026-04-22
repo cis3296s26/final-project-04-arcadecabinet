@@ -1,4 +1,4 @@
-import './GameMenu.css'
+import "./GameMenu.css";
 
 // Import all images so Vite can find them
 import csImg from "./imgs/cs2-bg.png";
@@ -18,23 +18,27 @@ function GameMenu({ onCreate }) {
       </header>
 
       <section className="grid-container">
+        {/* Terraria - Now Available */}
         <article className="game-card">
           <div className="image-wrapper">
-            <img src={csImg} alt="CS2" draggable="false" />
+            <img src={terrariaImg} alt="Terraria" draggable="false" />
             <div className="overlay-buttons">
               <button
                 className="btn create-btn"
-                onClick={() => onCreate("cs2")}
+                onClick={() => onCreate("terraria")}
               >
                 Create
               </button>
-              <button className="btn join-btn" onClick={() => onCreate("cs2")}>
+              <button
+                className="btn join-btn"
+                onClick={() => onCreate("terraria")}
+              >
                 Join
               </button>
             </div>
           </div>
           <div className="card-content">
-            <h3>CS2</h3>
+            <h3>Terraria</h3>
             <p>
               Status: <em>Available</em>
             </p>
@@ -115,12 +119,13 @@ function GameMenu({ onCreate }) {
           </div>
         </article>
 
+        {/* CS2 - Now Coming Soon */}
         <article className="game-card coming-soon">
           <div className="image-wrapper">
-            <img src={terrariaImg} alt="Terraria" draggable="false" />
+            <img src={csImg} alt="CS2" draggable="false" />
           </div>
           <div className="card-content">
-            <h3>Terraria</h3>
+            <h3>CS2</h3>
             <p>
               Status: <em>Coming Soon</em>
             </p>
@@ -140,7 +145,7 @@ function GameMenu({ onCreate }) {
         </article>
       </section>
     </div>
-  )
+  );
 }
 
-export default GameMenu
+export default GameMenu;
