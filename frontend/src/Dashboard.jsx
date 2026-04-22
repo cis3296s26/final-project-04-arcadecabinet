@@ -115,7 +115,7 @@ function Dashboard({ game }) {
           <h2>Active Servers ({servers.length})</h2>
           {servers.length === 0 ? (
             <p className="empty">
-              No servers running. Click "Start ${displayName} Server" to begin.
+              No servers running. Click "Start {displayName} Server" to begin.
             </p>
           ) : (
             <ul>
