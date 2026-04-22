@@ -53,10 +53,18 @@ button:disabled {
   color: white;
 }
 
+/* Updated Button Hover and Active States */
 .btn-primary:hover:not(:disabled) {
   background: #0284c7;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+}
+
+.btn-primary:active:not(:disabled), 
+.btn-danger:active:not(:disabled), 
+.btn-secondary:active:not(:disabled) {
+  transform: translateY(2px);
+  filter: brightness(0.8);
 }
 
 .btn-danger {
@@ -114,6 +122,7 @@ button:disabled {
   gap: 15px;
 }
 
+/* Updated Server Card with Arcade Glow and Hover */
 .server-card {
   background: #f8fafc;
   border: 2px solid #e2e8f0;
@@ -123,6 +132,14 @@ button:disabled {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 15px;
   align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.server-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+  border-color: #0ea5e9;
+  background-color: #ffffff;
 }
 
 .server-card span {
@@ -133,6 +150,7 @@ button:disabled {
   font-size: 1.3rem;
   font-weight: 700;
   color: #0ea5e9;
+  text-shadow: 0 0 5px rgba(14, 165, 233, 0.3);
 }
 
 .status {
@@ -174,6 +192,19 @@ button:disabled {
   padding: 8px 0;
   color: #475569;
   font-size: 1rem;
+}
+
+/* --- ARCADE RETRO OVERLAY --- */
+body::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%);
+  background-size: 100% 4px;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.2;
 }
 
 @media (max-width: 768px) {
