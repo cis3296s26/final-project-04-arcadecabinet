@@ -1,23 +1,26 @@
-# Project Name
-Put here a short paragraph describing your project. 
-Adding an screenshot or a mockup of your application in action would be nice.  
-
-![This is a screenshot.](images.png)
+# Arcade Cabinet
+![alt text](image.png)
 # How to run
-Provide here instructions on how to use your application.   
-- Download the latest binary from the Release section on the right on GitHub.  
-- On the command line uncompress using
-```
-tar -xzf  
-```
+
+Before running, ensure Docker Desktop is installed and running.
+
+This project is cross-platform (Windows/Mac/Linux) and the backend talks to Docker via the Docker socket mount (`/var/run/docker.sock`).
+
+If you enable the optional Playit sidecar, set `SECRET_KEY` in `.env`.
+
+If the backend returns `503 Service Unavailable` when you click “Start server”, it means it cannot reach Docker from inside the backend container:
+- Windows (Docker Desktop): set `DOCKER_SOCK_PATH=//var/run/docker.sock` in `.env`, then `docker compose down` and `docker compose up --build`.
+- Any OS (fallback): enable Docker’s TCP API and set `DOCKER_HOST=tcp://host.docker.internal:2375` in `.env` (less secure; dev/class projects only).
+
 - On the command line run with
 ```
-./hello
+docker-compose up --build  
 ```
-- You will see Hello World! on your terminal. 
+
+This will start the backend on port 8000 and frontend on port 3000.
 
 # How to contribute
-Follow this project board to know the latest status of the project: [http://...]([http://...])  
+Follow this project board to know the latest status of the project: [https://nq-98.atlassian.net/jira/software/projects/AC/boards/35] 
 
 ### How to build
 - Use this github repository: ... 

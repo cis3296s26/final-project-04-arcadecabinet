@@ -1,0 +1,52 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Cross-platform Docker socket mount:
+      # - Linux/macOS: leave unset (defaults to /var/run/docker.sock)
+      # - Windows (Docker Desktop): set DOCKER_SOCK_PATH=//var/run/docker.sock in `.env`
+      - ${DOCKER_SOCK_PATH:-/var/run/docker.sock}:/var/run/docker.sock
+      - playit-configs:/app/playit-configs  # Shared with Playit sidecar
+    environment:
+      - PYTHONUNBUFFERED=1
+      # Optional fallback if you expose Docker over TCP (e.g. Docker Desktop 2375)
+      - DOCKER_HOST=${DOCKER_HOST:-}
+    networks:
+      - arcade-network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    networks:
+      - arcade-network
+    depends_on:
+      - backend
+
+  # OPTIONAL: Playit sidecar for automatic tunneling
+  # Uncomment this section to enable automatic tunnel creation
+  # 
+  # playit:
+  #   image: ghcr.io/playit-cloud/playit-agent:latest
+  #   volumes:
+  #     - playit-configs:/configs
+  #   environment:
+  #     - SECRET_KEY=${SECRET_KEY}  # Add your Playit secret
+  #   networks:
+  #     - arcade-network
+  #   restart: unless-stopped
+  
+  # NOTE: The backend attaches game containers to the same `arcade-network` so the
+  # sidecar can reach them by container name (cross-platform).
+
+networks:
+  arcade-network:
+    name: arcade-network
+    driver: bridge
+
+volumes:
+  playit-configs:  # Shared volume for Playit configs
