@@ -1,37 +1,23 @@
-import { useEffect, useState } from 'react'
-import GameMenu from './GameMenu'
-import ServerStarter from './ServerStarter'
+import { useState } from "react";
+import GameMenu from "./GameMenu";
+import Dashboard from "./Dashboard";
 
 function App() {
-  const [page, setPage] = useState('menu')
-  const [game, setGame] = useState(null)
-
-  useEffect(() => {
-    const body = document.body
-    body.classList.remove('theme-menu', 'theme-starter')
-    body.classList.add(page === 'menu' ? 'theme-menu' : 'theme-starter')
-
-    return () => {
-      body.classList.remove('theme-menu', 'theme-starter')
-    }
-  }, [page])
+  const [page, setPage] = useState("menu");
+  const [game, setGame] = useState(null);
 
   const handleCreate = (gameName) => {
-    setGame(gameName)
-    setPage('starter')
-  }
-
-  const handleBack = () => {
-    setPage('menu')
-  }
+    setGame(gameName);
+    setPage("dashboard");
+  };
 
   return (
     <>
-      {page === 'menu' && <GameMenu onCreate={handleCreate} />}
-      {page === 'starter' && <ServerStarter game={game} onBack={handleBack} />}
+      {page === "menu" && <GameMenu onCreate={handleCreate} />}
+
+      {page === "dashboard" && <Dashboard game={game} />}
     </>
-  )
+  );
 }
 
-export default App
-
+export default App;

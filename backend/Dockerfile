@@ -2,9 +2,6 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Create playit configs directory with proper permissions
-RUN mkdir -p /app/playit-configs && chmod 777 /app/playit-configs
-
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 

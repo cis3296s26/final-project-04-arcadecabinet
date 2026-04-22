@@ -4,13 +4,9 @@
 
 Before running, ensure Docker Desktop is installed and running.
 
-This project is cross-platform (Windows/Mac/Linux) and the backend talks to Docker via the Docker socket mount (`/var/run/docker.sock`).
+1. In Docker Desktop settings, under "General", enable "Expose daemon on tcp://localhost:2375 without TLS".
 
-If you enable the optional Playit sidecar, set `SECRET_KEY` in `.env`.
-
-If the backend returns `503 Service Unavailable` when you click “Start server”, it means it cannot reach Docker from inside the backend container:
-- Windows (Docker Desktop): set `DOCKER_SOCK_PATH=//var/run/docker.sock` in `.env`, then `docker compose down` and `docker compose up --build`.
-- Any OS (fallback): enable Docker’s TCP API and set `DOCKER_HOST=tcp://host.docker.internal:2375` in `.env` (less secure; dev/class projects only).
+2. The `.env` file is configured for cross-platform. For Windows/Mac/Linux, it uses `tcp://host.docker.internal:2375`. If you need to change it, edit `.env`.
 
 - On the command line run with
 ```
