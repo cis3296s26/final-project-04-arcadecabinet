@@ -8,18 +8,27 @@ function Dashboard({ game }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const startTestServer = async () => {
+  const displayName = game
+    ? game.charAt(0).toUpperCase() + game.slice(1)
+    : "Game";
+
+  const startServer = async () => {
     setLoading(true);
     setMessage("");
     try {
       const response = await fetch(`${API_URL}/api/test/start`, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // Send selected game type to backend
+        body: JSON.stringify({ game: game }),
       });
       const data = await response.json();
 
       if (data.success) {
         setMessage(
-          `✓ Minecraft server ${data.server.join_code} started on port ${data.server.port}`,
+          `✓ ${displayName} server ${data.server.join_code} started on port ${data.server.port}`,
         );
         fetchServers();
       }
@@ -60,21 +69,25 @@ function Dashboard({ game }) {
     }
   };
 
+  useEffect(() => {
+    fetchServers();
+  }, []);
+
   return (
     <div className="App">
       <header>
         <h1>🎮 Arcade Cabinet</h1>
-        <p>Proof of Concept - Docker Integration Test</p>
+        <p>{displayName} Control Panel</p>
       </header>
 
       <main>
         <div className="controls">
           <button
-            onClick={startTestServer}
+            onClick={startServer}
             disabled={loading}
             className="btn-primary"
           >
-            {loading ? "Starting..." : "Start Minecraft Server"}
+            {loading ? "Starting..." : `Start ${displayName} Server`}
           </button>
 
           <button
@@ -102,7 +115,7 @@ function Dashboard({ game }) {
           <h2>Active Servers ({servers.length})</h2>
           {servers.length === 0 ? (
             <p className="empty">
-              No servers running. Click "Start Minecraft Server" to begin.
+              No servers running. Click "Start ${displayName} Server" to begin.
             </p>
           ) : (
             <ul>
@@ -117,18 +130,6 @@ function Dashboard({ game }) {
             </ul>
           )}
         </div>
-        {/*
-        <div className="info">
-          <h3>What This Proves:</h3>
-          <ul>
-            <li>✓ Backend can start Docker containers programmatically</li>
-            <li>✓ Frontend can communicate with backend API</li>
-            <li>✓ Join codes are generated and tracked</li>
-            <li>✓ Containers are assigned random ports</li>
-            <li>✓ Full tech stack works together</li>
-          </ul>
-        </div>
-        */}
       </main>
     </div>
   );

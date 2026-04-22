@@ -18,29 +18,7 @@ function GameMenu({ onCreate }) {
       </header>
 
       <section className="grid-container">
-        <article className="game-card">
-          <div className="image-wrapper">
-            <img src={csImg} alt="CS2" draggable="false" />
-            <div className="overlay-buttons">
-              <button
-                className="btn create-btn"
-                onClick={() => onCreate("cs2")}
-              >
-                Create
-              </button>
-              <button className="btn join-btn" onClick={() => onCreate("cs2")}>
-                Join
-              </button>
-            </div>
-          </div>
-          <div className="card-content">
-            <h3>CS2</h3>
-            <p>
-              Status: <em>Available</em>
-            </p>
-          </div>
-        </article>
-
+        {/* // Show specific game create page */}
         <article className="game-card">
           <div className="image-wrapper">
             <img src={mcImg} alt="Minecraft" draggable="false" />
@@ -63,6 +41,45 @@ function GameMenu({ onCreate }) {
             <h3>Minecraft</h3>
             <p>
               Status: <em>Available</em>
+            </p>
+          </div>
+        </article>
+
+        <article className="game-card">
+          <div className="image-wrapper">
+            <img src={terrariaImg} alt="Terraria" draggable="false" />
+            <div className="overlay-buttons">
+              <button
+                className="btn create-btn"
+                onClick={() => onCreate("terraria")}
+              >
+                Create
+              </button>
+              <button
+                className="btn join-btn"
+                onClick={() => onCreate("terraria")}
+              >
+                Join
+              </button>
+            </div>
+          </div>
+          <div className="card-content">
+            <h3>Terraria</h3>
+            <p>
+              Status: <em>Available</em>
+            </p>
+          </div>
+        </article>
+
+        {/* --- COMING SOON --- */}
+        <article className="game-card coming-soon">
+          <div className="image-wrapper">
+            <img src={csImg} alt="CS2" draggable="false" />
+          </div>
+          <div className="card-content">
+            <h3>CS2</h3>
+            <p>
+              Status: <em>Coming Soon</em>
             </p>
           </div>
         </article>
@@ -109,18 +126,6 @@ function GameMenu({ onCreate }) {
           </div>
           <div className="card-content">
             <h3>Rust</h3>
-            <p>
-              Status: <em>Coming Soon</em>
-            </p>
-          </div>
-        </article>
-
-        <article className="game-card coming-soon">
-          <div className="image-wrapper">
-            <img src={terrariaImg} alt="Terraria" draggable="false" />
-          </div>
-          <div className="card-content">
-            <h3>Terraria</h3>
             <p>
               Status: <em>Coming Soon</em>
             </p>

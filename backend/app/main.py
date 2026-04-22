@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 import docker
 import random
@@ -41,37 +41,46 @@ def list_servers():
 
 
 @app.post("/api/test/start")
-def start_test_container():
+async def start_test_container(request: Request):
     """
-    POC: Start a simple Minecraft server container using itzg 
+    POC: Start a simple Minecraft or Terraria server container
     """
+    # Read game type from request body
+    data = await request.json()
+    game_type = data.get("game", "minecraft").lower()
     join_code = generate_join_code()
     
-    # Start a Minecraft server container using a simpler Minecraft server image
+    # Configure Docker settings based on game type
+    if game_type == "terraria":
+        image = "beardedio/terraria:latest"
+        env = {"EULA": "true"}
+        internal_port = '7777/tcp'
+    else:
+        image = "itzg/minecraft-server:latest"
+        env = {"EULA": "TRUE", "VERSION": "1.20.4", "TYPE": "VANILLA"}
+        internal_port = '25565/tcp'
+
+    # Start the container
     container = docker_client.containers.run(
-        "itzg/minecraft-server:latest",
+        image,
         detach=True,
-        environment={
-            "EULA": "TRUE",
-            "VERSION": "1.20.4",
-            "TYPE": "VANILLA"
-        },
-        ports={'25565/tcp': None},
-        volumes=[f"/tmp/minecraft-{join_code}:/data"],
-        name=f"minecraft-{join_code.lower()}",
+        environment=env,
+        ports={internal_port: None},
+        volumes=[f"/tmp/{game_type}-{join_code}:/data"],
+        name=f"{game_type}-{join_code.lower()}",
         remove=True
     )
 
     # Get assigned host port
     container.reload()
-    port_info = container.attrs['NetworkSettings']['Ports']['25565/tcp']
+    port_info = container.attrs['NetworkSettings']['Ports'][internal_port]
     host_port = port_info[0]['HostPort'] if port_info else "unknown"
     
     # Store server info
     server_info = {
         "join_code": join_code,
         "container_id": container.short_id,
-        "game_type": "minecraft",
+        "game_type": game_type,
         "status": "running",
         "port": host_port
     }
@@ -80,7 +89,7 @@ def start_test_container():
     return {
         "success": True,
         "server": server_info,
-        "message": f"Minecraft server started. Join at localhost:{host_port}"
+        "message": f"{game_type.capitalize()} server started. Join at localhost:{host_port}"
     }
 
 
