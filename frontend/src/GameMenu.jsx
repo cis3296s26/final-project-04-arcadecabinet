@@ -1,4 +1,4 @@
-import "./index1.css";
+import './GameMenu.css'
 
 // Import all images so Vite can find them
 import csImg from "./imgs/cs2-bg.png";
@@ -12,7 +12,7 @@ import valheimImg from "./imgs/valheim-bg.png";
 
 function GameMenu({ onCreate }) {
   return (
-    <>
+    <div className="game-menu">
       <header className="main-header">
         <h1 className="logo-text">Arcade Cabinet</h1>
       </header>
@@ -139,8 +139,8 @@ function GameMenu({ onCreate }) {
           </div>
         </article>
       </section>
-    </>
-  );
+    </div>
+  )
 }
 
-export default GameMenu;
+export default GameMenu
