@@ -18,7 +18,7 @@ function App() {
       const data = await response.json()
       
       if (data.success) {
-        setMessage(`✓ Server ${data.server.join_code} started on port ${data.server.port}`)
+        setMessage(`✓ Minecraft server ${data.server.join_code} started on port ${data.server.port}`)
         fetchServers()
       }
     } catch (error) {
@@ -72,7 +72,7 @@ function App() {
             disabled={loading}
             className="btn-primary"
           >
-            {loading ? 'Starting...' : 'Start Test Server'}
+            {loading ? 'Starting...' : 'Start Minecraft Server'}
           </button>
           
           <button 
@@ -100,7 +100,7 @@ function App() {
         <div className="servers">
           <h2>Active Servers ({servers.length})</h2>
           {servers.length === 0 ? (
-            <p className="empty">No servers running. Click "Start Test Server" to begin.</p>
+            <p className="empty">No servers running. Click "Start Minecraft Server" to begin.</p>
           ) : (
             <ul>
               {servers.map((server) => (
