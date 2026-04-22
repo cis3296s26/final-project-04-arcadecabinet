@@ -3,7 +3,7 @@ import "./App.css";
 
 const API_URL = "http://localhost:8000";
 
-function Dashboard({ game }) {
+function Dashboard({ game, onBack }) {
   const [servers, setServers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -21,7 +21,6 @@ function Dashboard({ game }) {
         headers: {
           "Content-Type": "application/json",
         },
-        // Send selected game type to backend
         body: JSON.stringify({ game: game }),
       });
       const data = await response.json();
@@ -74,13 +73,15 @@ function Dashboard({ game }) {
   }, []);
 
   return (
-    <div className="App">
-      <header>
-        <h1>🎮 Arcade Cabinet</h1>
-        <p>{displayName} Control Panel</p>
+    <div className="dashboard-wrapper">
+      <header className="dashboard-header">
+        <button onClick={onBack} className="btn-secondary back-btn">
+          ← Back to Menu
+        </button>
+        <h1>Arcade Cabinet</h1>
       </header>
 
-      <main>
+      <div className="dashboard-panel">
         <div className="controls">
           <button
             onClick={startServer}
@@ -130,7 +131,7 @@ function Dashboard({ game }) {
             </ul>
           )}
         </div>
-      </main>
+      </div>
     </div>
   );
 }
